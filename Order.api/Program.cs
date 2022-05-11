@@ -4,8 +4,11 @@ using Order.Domain.Iterfaces;
 using Order.Infrastructure;
 using Order.Infrastructure.Repositories;
 using Polly;
+using Steeltoe.Discovery.Client;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.AddDiscoveryClient();
 
 // Add services to the container.
 
