@@ -9,6 +9,7 @@ namespace Order.Domain.Models
     public class Produit
     {
         public int Id { get; set; }
-        public string designation { get; set; }
+
+        public string Name { get; set; }
     }
 }

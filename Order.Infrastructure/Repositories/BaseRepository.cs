@@ -23,6 +23,7 @@ namespace Order.Infrastructure.Repositories
         public T add(T entity)
         {
             _context.Set<T>().Add(entity);
+            _context.SaveChanges();
             return entity;
         }
 

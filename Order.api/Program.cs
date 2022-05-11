@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Order.api.RemoteCall;
 using Order.Domain.Iterfaces;
 using Order.Infrastructure;
 using Order.Infrastructure.Repositories;
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 
 builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
+builder.Services.AddHttpClient<IHttpProduit, HttpProduit>();
 
 var app = builder.Build();
 

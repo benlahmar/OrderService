@@ -13,7 +13,7 @@ namespace Order.Infrastructure
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
-        public DbSet<Command> commandes { get; set; }
+        public DbSet<Command> Commandes { get; set; }
         public DbSet<Composant> Composants { get; set; }
     }
 }
