@@ -81,5 +81,11 @@ namespace Order.api.Controllers
             return DateTime.Now;
 
         }
+
+        [HttpGet("retry/{id}")]
+        public Task<ActionResult<Produit>> getprdretry(int id)
+        {
+            return _http.GetById2(id);
+        }
     }
 }

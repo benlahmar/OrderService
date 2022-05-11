@@ -3,6 +3,8 @@ using Order.api.RemoteCall;
 using Order.Domain.Iterfaces;
 using Order.Infrastructure;
 using Order.Infrastructure.Repositories;
+using Polly;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -23,6 +25,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
 builder.Services.AddHttpClient<IHttpProduit, HttpProduit>();
+
+
+var httpRetryPolicy = Policy.HandleResult<HttpResponseMessage>
+    (r => !r.IsSuccessStatusCode)
+    .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(retryAttempt));
+
+builder.Services.AddSingleton<IAsyncPolicy<HttpResponseMessage>>(httpRetryPolicy);
+
+
+
+
 
 var app = builder.Build();
 
